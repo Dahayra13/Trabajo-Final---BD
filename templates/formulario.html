@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Mascota Perdida</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* General */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        /* Formulario */
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Tabla */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registrar Mascota Perdida</h1>
+    <form id="registerForm">
+        <label for="TipoDoc">Tipo de Documento:</label>
+        <select id="TipoDoc" name="TipoDoc" required>
+            <option value="DNI">DNI</option>
+            <option value="CE">CE</option>
+        </select>
+
+        <label for="NumDoc">Número de Documento:</label>
+        <input type="text" id="NumDoc" name="NumDoc" required>
+
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="Nombre" name="Nombre" required>
+
+        <label for="Apellido">Apellido:</label>
+        <input type="text" id="Apellido" name="Apellido" required>
+
+        <label for="FechaNac">Fecha de Nacimiento:</label>
+        <input type="date" id="FechaNac" name="FechaNac" required>
+
+        <label for="NombreMascota">Nombre de la Mascota:</label>
+        <input type="text" id="NombreMascota" name="NombreMascota" required>
+
+        <label for="Animal">Animal:</label>
+        <select id="Animal" name="Animal" required>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+        <label for="Raza">Raza:</label>
+        <input type="text" id="Raza" name="Raza" required>
+
+        <label for="FechaNacMascota">Fecha de Nacimiento de la Mascota:</label>
+        <input type="date" id="FechaNacMascota" name="FechaNacMascota">
+
+        <label for="CondicionMedica">Condición Médica:</label>
+        <select id="CondicionMedica" name="CondicionMedica" required>
+            <option value="SI">Sí</option>
+            <option value="NO">No</option>
+        </select>
+
+        <label for="Especificacion">Especificación (Opcional):</label>
+        <input type="text" id="Especificacion" name="Especificacion">
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h2>Registros de Mascotas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Animal</th>
+                <th>Raza</th>
+                <th>Condición Médica</th>
+            </tr>
+        </thead>
+        <tbody id="recordsTable"></tbody>
+    </table>
+
+    <script>
+        // Captura el formulario y envía los datos al backend
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {
+                TipoDoc: document.getElementById('TipoDoc').value,
+                NumDoc: document.getElementById('NumDoc').value,
+                Nombre: document.getElementById('Nombre').value,
+                Apellido: document.getElementById('Apellido').value,
+                FechaNac: document.getElementById('FechaNac').value,
+                NombreMascota: document.getElementById('NombreMascota').value,
+                Animal: document.getElementById('Animal').value,
+                Raza: document.getElementById('Raza').value,
+                FechaNacMascota: document.getElementById('FechaNacMascota').value,
+                CondicionMedica: document.getElementById('CondicionMedica').value,
+                Especificacion: document.getElementById('Especificacion').value,
+            };
+
+            // Enviar datos al backend
+            fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.message) {
+                    alert(result.message);
+                    fetchRecords(); // Actualizar tabla
+                } else {
+                    alert('Error al registrar');
+                }
+            })
+            .catch(console.error);
+        });
+
+        // Función para obtener los registros y mostrarlos en la tabla
+        function fetchRecords() {
+            fetch('/api/mascotas')
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.getElementById('recordsTable');
+                    table.innerHTML = '';
+                    data.forEach(mascota => {
+                        table.innerHTML += `
+                            <tr>
+                                <td>${mascota.idMascota}</td>
+                                <td>${mascota.Nombre}</td>
+                                <td>${mascota.Animal}</td>
+                                <td>${mascota.Raza}</td>
+                                <td>${mascota.CondicionMedica}</td>
+                            </tr>
+                        `;
+                    });
+                })
+                .catch(console.error);
+        }
+
+        // Cargar registros al iniciar la página
+        window.onload = fetchRecords;
+    </script>
+</body>
+</html>

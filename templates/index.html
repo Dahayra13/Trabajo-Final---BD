@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helping Pets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="cabecera">
+        <a href="/" class="logo">Helping Pets</a>
+        <ul class="menu">
+            <li><a href="/">INICIO</a></li>
+            <li><a href="/formulario">REGISTRA TU MASCOTA</a></li>
+            <li><a href="/buscador">ACCESO BUSCADOR</a></li>
+        </ul>
+    </div>
+
+    <!-- Portada -->
+    <div id="inicio" class="portada">
+        <div class="texto">
+            <h1>Helping Pets</h1>
+            <p>"Nosotros, en Helping Pets, sabemos lo doloroso que es perder a un miembro de la familia peluda. 
+                Es por eso que nos dedicamos a encontrar a tus mascotas desaparecidas lo antes posible. 
+                Entendemos que cada animal es único y especial, y haremos todo lo que esté a nuestro 
+                alcance para reunirte con tu mejor amigo."</p>
+            <a href="/formulario">REGISTRA TU MASCOTA PERDIDA</a>
+        </div>
+    </div>
+
+    <!-- SERVICIOS-->
+    <div id="servicios" class="servicios">
+        <h1>NUESTROS SERVICIOS</h1>
+        <div class="opciones">
+            <div class="oferta">
+                <img src="{{ url_for('static', filename='imagenes/clinica_veterinaria.png') }}" alt="Clínica veterinaria">
+                <h2>Clínica veterinaria</h2>
+                <p>Colaboramos con refugios y organizaciones de rescate para garantizar que las
+                   mascotas perdidas tengan un lugar seguro mientras encuentran a sus dueños.</p>
+            </div>
+
+            <div class="oferta">
+                <img src="{{ url_for('static', filename='imagenes/estetica_pet.png') }}" alt="Estética para mascotas">
+                <h2>Baños Estética</h2>
+                <p>Contamos con una comunidad comprometida y tecnología avanzada para rastrear y reportar 
+                   mascotas perdidas en tiempo real, maximizando las posibilidades de encontrarlas rápidamente.</p>
+            </div>
+
+            <div class="oferta">
+                <img src="{{ url_for('static', filename='imagenes/casa_pet.png') }}" alt="Hospedaje para mascotas">
+                <h2>Hospedaje Mascota</h2>
+                <p>Brindamos opciones para que las mascotas encontradas puedan permanecer en hogares temporales 
+                   seguros mientras conectamos con sus familias o buscamos un nuevo hogar adoptivo.</p>
+            </div>
+
+            <div class="oferta">
+                <img src="{{ url_for('static', filename='imagenes/reporte.png') }}" alt="Monitoreo de mascotas">
+                <h2>Monitoreo</h2>
+                <p>Implementamos herramientas inteligentes para rastrear mascotas perdidas y enviar notificaciones 
+                   oportunas a sus dueños y comunidades cercanas, agilizando su localización.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PARRALLAX -->
+    <div id="nosotros" class="parallax">
+        <h1>Nosotros</h1>
+        <p>
+            ¡Imagínate la alegría de volver a ver esos ojitos brillando de felicidad! En Helping Pets, 
+            comprendemos el profundo vínculo que te une a tu mascota y el dolor que causa su pérdida. 
+            ¡Pero no te preocupes! Somos tu equipo de búsqueda y rescate de mascotas más apasionado y eficiente. 
+            Con nuestra experiencia y tecnología de punta, exploramos cada rincón para encontrar a tu peludo amigo. 
+            ¡En Helping Pets, la esperanza nunca se pierde!
+        </p>
+    </div>   
+
+    <!-- Historias de Reencuentros -->
+    <div id="historias" class="historias">
+        <h1>Historias de reencuentros</h1>
+        <h2>Amor reunido</h2>
+        <div class="carousel">
+            <!-- Items -->
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-5.jpg') }}" alt="Miriam y Sky">
+                <h3>Miriam y Sky</h3>
+                <p>Miriam no perdió las esperanzas para volver a ver a Sky. Gracias a la ayuda de Helping Pets, se pudo reunir a esta hermosa familia.</p>
+            </div>
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-1.webp') }}" alt="Bestia y Tracy">
+                <h3>Bestia y Tracy</h3>
+                <p>Después de estar perdido tres meses, Helping Pets reunió a un perro perdido con su familia.</p>
+            </div>
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-3.webp') }}" alt="Fallon y Scott">
+                <h3>Fallon y Scott</h3>
+                <p>Cuando la gata de 11 años se perdió, su dueño utilizó Helping Pets para traerla a casa.</p>
+            </div>
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-4.webp') }}" alt="Bella y Amanda">
+                <h3>Bella y Amanda</h3>
+                <p>Cuando Bella desapareció en Atlanta, Helping Pets ayudó a traerla a casa en dos días.</p>
+            </div>
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-2.webp') }}" alt="Sophie y Kristian">
+                <h3>Sophie y Kristian</h3>
+                <p>La perrita chihuahua mayor de 16 años estuvo desaparecida tres noches, pero Helping Pets la ayudó a volver.</p>
+            </div>
+            <div class="item">
+                <img src="{{ url_for('static', filename='imagenes/carousel-6.jpg') }}" alt="Mayra y Michi">
+                <h3>Mayra y Michi</h3>
+                <p>Con la ayuda de Helping Pets, Mayra pudo encontrar a su amada mascota Michi, sana y salva.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuestros planes de búsqueda -->
+    <div id="planes" class="planes">
+        <h1>Nuestros planes de búsqueda</h1>
+        <div class="planes-container">
+            <div class="plan">
+                <img src="{{ url_for('static', filename='imagenes/Plan Beagle.JPG') }}" alt="Plan Beagle">
+            </div>
+            <div class="plan">
+                <img src="{{ url_for('static', filename='imagenes/Plan Dalmata.jpg') }}" alt="Plan Dálmata">
+            </div>
+            <div class="plan">
+                <img src="{{ url_for('static', filename='imagenes/Plan Husky.jpg') }}" alt="Plan Husky">
+            </div>
+            <div class="planes-info">
+                <p>Los mejores precios para escoger</p>
+                <p>Puedes tomar en cuenta el precio y el radio de búsqueda para encontrar a tu mascota.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección destacada -->
+    <div class="seccion-imagen">
+        <img src="{{ url_for('static', filename='imagenes/mediosdePagoPE.jpg') }}" alt="Medios de pago">
+    </div>
+</body>
+</html>
